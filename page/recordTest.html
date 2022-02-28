@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Voice CMKL">
+    <meta name="keywords" content="Voice CMKL">
+
+    <!-- Title Page-->
+    <title>Voice CMKL</title>
+
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <!-- Icons font CSS-->
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Main CSS-->
+    <link href="css/main.css" rel="stylesheet" media="all">
+
+
+    <!-- Vendor CSS-->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" media="all">
+
+
+</head>
+
+<body>
+    <div class="se-pre-con"></div>
+    <div class="page-wrapper bg-gra-02 p-t-30 p-b-100 font-bai">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body center-align">
+                    
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group">
+                                <label class="label">จำนวน record ที่ต้องการ post</label>
+                                <input class="input--style-4" type="number" id="repeat" name="repeat" required>
+                                <div class="invalid-feedback" id="age-error"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="justify-content-center" id="upload-pending-div"  style="display: none;">
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="col"> <img class="upload-pending-img" src="/img/positive.png"></div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col"><p>คุณอัดเสียงครบแล้ว เราเร่งกำลังอัปโหลดไฟล์อยู่ กรุณารอสักครู่ . . .</p></div>
+                        </div>
+                    </div>
+                    <div id="record-pending-div">
+                        <div>
+                            <div class="d-flex justify-content-center" id="">
+                                <div class="card border-light mb-3" style="max-width: 27rem;">
+                                    <div class="card-header" id="dialect_count">คุณกำลังอ่านประโยคที่ 0/0</div>
+                                    <div class="card-body">
+                                        <!-- <h5 class="card-title" >Light card title</h5> -->
+                                        <p class="card-text"  id="dialect_sentence">รอโหลดข้อมูลสักครู่นะจ้ะ</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="record-button">
+                            <div class=" justify-content-center">
+                                <canvas class="js-volume" width="160" height="2"></canvas>
+                            </div>
+                            <div>
+                                <audio controls type="audio/wav"></audio>
+                                <br>
+                                <button class="btn btn-circle rounded-circle btn-danger js-start"><i class="fa fa-microphone"></i></button>
+                                <button class="btn btn-circle rounded-circle btn-secondary js-stop" disabled><i class="fa fa-stop"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-bar-width justify-content-center ">
+                        <div class="row">
+                            <div class="col">
+                                <i class="fa fa-circle" style="color: #28a745;"></i> อัพโหลดสำเร็จ <p id ="complete_upload">0</p>
+                            </div>
+                            <div class="col">
+                                <i class="fa fa-circle" style="color: #ffc107;"></i> อัพโหลดไม่สำเร็จ <p id ="pending_upload">0</p>
+                            </div>
+
+                        </div>
+                        <div class="p-t-15" id="prev_div" style="display: none;">
+                            <button class="btn btn-outline-secondary" onclick="prevTab()"><< กลับไปฟังประโยคก่อนหน้า</button>
+                        </div>
+                        <div class="p-t-15" id="next_div" style="display: none;">
+                            <button class="btn btn-outline-secondary" onclick="nextTab()">ไปประโยคถัดไป >></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <script src="vendor/datepicker/moment.min.js"></script>
+    <script src="vendor/datepicker/daterangepicker.js"></script>
+    
+    <script src="js/WavAudioEncoder.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    
+
+
+
+    <!-- Main JS-->
+
+    <script src="js/global.js"></script>
+    <script src="js/location.js"></script>
+    <script src="js/getProfile.js"></script>
+    <script src="js/recordTest.js"></script>
+
+</body>
+
+</html>
+<!-- end document-->

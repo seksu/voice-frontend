@@ -1,0 +1,7 @@
+{
+    "api_path": "https://voice.cmkl.ac.th/api",
+    "path" : "https://voice.cmkl.ac.th",
+    "storage_name" : "Voice2CMKLRecord",
+    "dialect_storage_name" : "Voice2CMKLRecordDialect"
+    
+}
